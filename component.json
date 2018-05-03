@@ -1,0 +1,9 @@
+{
+	"name": "img-lightbox",
+	"repo": "englishextra/img-lightbox",
+	"version": "0.1.0",
+	"scripts": ["img-lightbox.js"],
+	"styles": ["img-lightbox.css"],
+	"author": "englishextra",
+	"license": "(MIT)"
+}
