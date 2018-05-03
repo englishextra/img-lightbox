@@ -107,4 +107,4 @@ manageImgLightboxLinks("undefined" !== typeof window ? window : this, document.b
 
 ## License
 
-Available under MIT License
+Available under [MIT license](https://opensource.org/licenses/MIT).
