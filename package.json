@@ -1,6 +1,6 @@
 {
 	"name": "img-lightbox",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Responsive no-jQuery pure JS/CSS Lightbox for images, no dependencies, 10kb unminified source code, with demo",
 	"keywords": ["lightbox",
 	"vanilla-javascript",

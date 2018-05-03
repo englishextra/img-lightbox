@@ -2,7 +2,7 @@
 
 Responsive no-jQuery pure JS/CSS Lightbox for images, no dependencies, 10kb unminified source code, with demo
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/369642c14d3344bebe134c76f0f5dde8)](https://www.codacy.com/app/englishextra/img-lightbox?utm_source=github.com&utm_medium=referral&utm_content=englishextra/img-lightbox&utm_campaign=badger)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2fbe9cbd4dcb4d3b8fe83dac98633f67)](https://www.codacy.com/app/englishextra/img-lightbox?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=englishextra/img-lightbox&amp;utm_campaign=Badge_Grade)
 [![NPM](https://nodei.co/npm/img-lightbox.png?downloads=true)](https://nodei.co/npm/img-lightbox/)
 
 [![npm](https://img.shields.io/npm/v/img-lightbox.svg)](https://github.com/englishextra/img-lightbox)
@@ -11,11 +11,11 @@ Responsive no-jQuery pure JS/CSS Lightbox for images, no dependencies, 10kb unmi
 
 ### Demo
 
-[codepen](https://codepen.io/englishextra/full/jmjayV/)
+[codepen](https://codepen.io/englishextra/full/YLQxRp/)
 
-[jsfiddle](https://fiddle.jshell.net/englishextra/8pzy6uhr/show/)
+[jsfiddle](https://fiddle.jshell.net/englishextra/8hhpbv4h/show/)
 
-[jsbin](https://output.jsbin.com/saqine)
+[jsbin](https://output.jsbin.com/laxudog)
 
 ### Features
 
@@ -31,15 +31,15 @@ Responsive no-jQuery pure JS/CSS Lightbox for images, no dependencies, 10kb unmi
 
 #### jsDelivr
 
-`https://cdn.jsdelivr.net/gh/englishextra/img-lightbox@0.1.0/img-lightbox.min.js`
+`https://cdn.jsdelivr.net/gh/englishextra/img-lightbox@0.1.1/img-lightbox.min.js`
 
-`https://cdn.jsdelivr.net/gh/englishextra/img-lightbox@0.1.0/img-lightbox.min.css`
+`https://cdn.jsdelivr.net/gh/englishextra/img-lightbox@0.1.1/img-lightbox.min.css`
 
 #### unpkg
 
-`https://unpkg.com/img-lightbox@0.1.0/img-lightbox.js`
+`https://unpkg.com/img-lightbox@0.1.1/img-lightbox.js`
 
-`https://unpkg.com/img-lightbox@0.1.0/img-lightbox.css`
+`https://unpkg.com/img-lightbox@0.1.1/img-lightbox.css`
 
 ### Install
 
@@ -107,4 +107,4 @@ manageImgLightboxLinks("undefined" !== typeof window ? window : this, document.b
 
 ## License
 
-available under MIT License
+Available under MIT License
