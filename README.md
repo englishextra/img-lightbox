@@ -63,7 +63,7 @@ Responsive no-jQuery pure JS/CSS Lightbox for images, no dependencies, 10kb unmi
 <a href="https://farm1.staticflickr.com/955/27854475488_4f2b7f52e4_k.jpg"
 class="img-lightbox-link"
 data-src="https://farm1.staticflickr.com/955/27854475488_4f2b7f52e4_k.jpg"
-aria-label="hidden"
+aria-hidden="true"
 rel="lightbox"><img src="https://farm1.staticflickr.com/955/27854475488_5f82a379ca_z.jpg" alt="Image Lightbox" /></a>
  ```
 
