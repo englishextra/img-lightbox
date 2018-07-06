@@ -32,24 +32,6 @@
 
 	var forcedHTTP = getHTTP(true);
 
-	var Timers = function (ids) {
-		this.ids = ids || [];
-	};
-	Timers.prototype.timeout = function (fn, ms) {
-		var id = setTimeout(fn, ms);
-		this.ids.push(id);
-		return id;
-	};
-	Timers.prototype.interval = function (fn, ms) {
-		var id = setInterval(fn, ms);
-		this.ids.push(id);
-		return id;
-	};
-	Timers.prototype.clear = function () {
-		this.ids.forEach(clearTimeout);
-		this.ids = [];
-	};
-
 	var debounce = function (func, wait) {
 		var timeout;
 		var args;
@@ -196,20 +178,18 @@
 				img.src = dummySrc;
 				container[style].display = "none";
 			};
-			var timers = new Timers();
-			timers.timeout(function () {
-				timers.clear();
-				timers = null;
+			var timer = setTimeout(function () {
+				clearTimeout(timer);
+				timer = null;
 				hideImg();
 			}, 400);
 		};
 		if (container && img) {
 			img[classList].remove(fadeInUpClass);
 			img[classList].add(fadeOutDownClass);
-			var timers = new Timers();
-			timers.timeout(function () {
-				timers.clear();
-				timers = null;
+			var timer = setTimeout(function () {
+				clearTimeout(timer);
+				timer = null;
 				hideContainer();
 			}, 400);
 		}
