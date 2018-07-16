@@ -31,15 +31,15 @@ Responsive no-jQuery pure JS/CSS Lightbox for images, no dependencies, 10kb unmi
 
 #### jsDelivr
 
-`https://cdn.jsdelivr.net/gh/englishextra/img-lightbox@0.1.1/img-lightbox.min.js`
+`https://cdn.jsdelivr.net/gh/englishextra/img-lightbox@0.1.2/img-lightbox.min.js`
 
-`https://cdn.jsdelivr.net/gh/englishextra/img-lightbox@0.1.1/img-lightbox.min.css`
+`https://cdn.jsdelivr.net/gh/englishextra/img-lightbox@0.1.2/img-lightbox.min.css`
 
 #### unpkg
 
-`https://unpkg.com/img-lightbox@0.1.1/img-lightbox.js`
+`https://unpkg.com/img-lightbox@0.1.2/img-lightbox.js`
 
-`https://unpkg.com/img-lightbox@0.1.1/img-lightbox.css`
+`https://unpkg.com/img-lightbox@0.1.2/img-lightbox.css`
 
 ### Install
 
@@ -95,6 +95,9 @@ var manageImgLightboxLinks = function (root, scope) {
       onError: function () {
         // hide your preloader
       },
+      onClosed: function () {
+        // hide your preloader
+      }
     });
   }
 };

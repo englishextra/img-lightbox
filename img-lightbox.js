@@ -150,13 +150,11 @@
 	};
 	/*jshint bitwise: true */
 
-	var callCallback = function (func, data) {
-		if (typeof func !== "function") {
-			return;
-		}
-		var caller = func.bind(this);
-		caller(data);
-	};
+	var handleimgLightboxContainer;
+	var handleimgLightboxWindow;
+
+	var handleimgLightboxContainerWithBind;
+	var handleimgLightboxWindowWithBind;
 
 	var hideimgLightbox = function () {
 		var container = document[getElementsByClassName]("img-lightbox-container")[0] || "";
@@ -179,36 +177,51 @@
 				container[style].display = "none";
 			};
 			var timer = setTimeout(function () {
-				clearTimeout(timer);
-				timer = null;
-				hideImg();
-			}, 400);
+					clearTimeout(timer);
+					timer = null;
+					hideImg();
+				}, 400);
 		};
 		if (container && img) {
+			container[_removeEventListener]("click", handleimgLightboxContainer);
+			container[_removeEventListener]("click", handleimgLightboxContainerWithBind);
+			root[_removeEventListener]("keyup", handleimgLightboxWindow);
+			root[_removeEventListener]("keyup", handleimgLightboxWindowWithBind);
 			img[classList].remove(fadeInUpClass);
 			img[classList].add(fadeOutDownClass);
 			var timer = setTimeout(function () {
-				clearTimeout(timer);
-				timer = null;
-				hideContainer();
-			}, 400);
+					clearTimeout(timer);
+					timer = null;
+					hideContainer();
+				}, 400);
 		}
 	};
-	var handleimgLightboxContainer = function () {
+
+	var callCallback = function (func, data) {
+		if (typeof func !== "function") {
+			return;
+		}
+		var caller = func.bind(this);
+		caller(data);
+	};
+
+	handleimgLightboxContainer = function (callback) {
 		var container = document[getElementsByClassName]("img-lightbox-container")[0] || "";
 		if (container) {
-			container[_removeEventListener]("click", handleimgLightboxContainer);
 			hideimgLightbox();
+			callCallback(callback, root);
 		}
 	};
-	var handleimgLightboxWindow = function (ev) {
-		var _removeEventListener = "removeEventListener";
-		root[_removeEventListener]("keyup", handleimgLightboxWindow);
+
+	handleimgLightboxWindow = function (callback, ev) {
 		if (27 === (ev.which || ev.keyCode)) {
 			hideimgLightbox();
+			callCallback(callback, root);
 		}
 	};
+
 	var imgLightbox = function (scope, settings) {
+
 		var ctx = scope && scope.nodeName ? scope : "";
 
 		var options = settings || {};
@@ -261,8 +274,18 @@
 								callCallback(options.onError, root);
 							}
 						});
-						root[_addEventListener]("keyup", handleimgLightboxWindow);
-						container[_addEventListener]("click", handleimgLightboxContainer);
+
+						if (options.onClosed) {
+
+							handleimgLightboxContainerWithBind = handleimgLightboxContainer.bind(null, options.onClosed);
+							handleimgLightboxWindowWithBind = handleimgLightboxWindow.bind(null, options.onClosed);
+
+							container[_addEventListener]("click", handleimgLightboxContainerWithBind);
+							root[_addEventListener]("keyup", handleimgLightboxWindowWithBind);
+						} else {
+							container[_addEventListener]("click", handleimgLightboxContainer);
+							root[_addEventListener]("keyup", handleimgLightboxWindow);
+						}
 						container[style].display = "block";
 						/* LoadingSpinner.hide(); */
 					}
