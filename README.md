@@ -53,7 +53,7 @@ Responsive no-jQuery pure JS/CSS Lightbox for images, no dependencies, 10kb unmi
 
 ### Setup
 
-`class` is "img-lightbox-link" required.
+`class` "img-lightbox-link" is required and hardcoded.
 
 `data-src` is required, and contains URL of your image.
 
