@@ -6,7 +6,7 @@
 (function (root, document) {
 	"use strict";
 	var docBody = document.body || "";
-	
+
 	var animatedClass = "animated";
 	var appendChild = "appendChild";
 	var classList = "classList";
@@ -17,21 +17,21 @@
 	var style = "style";
 	var _addEventListener = "addEventListener";
 	var _length = "length";
-	var _removeEventListener = "removeEventListener";	
-	
+	var _removeEventListener = "removeEventListener";
+
 	var btnCloseClass = "btn-close";
 	var containerClass = "img-lightbox";
-	
+
 	var fadeInClass = "fadeIn";
 	var fadeInUpClass = "fadeInUp";
 	var fadeOutClass = "fadeOut";
 	var fadeOutDownClass = "fadeOutDown";
-	
+
 	var imgLightboxOpenClass = "img-lightbox--open";
 	var imgLightboxLinkIsBindedClass = "img-lightbox-link--is-binded";
-	
+
 	var isLoadedClass = "is-loaded";
-	
+
 	var dummySrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
 	var debounce = function (func, wait) {
 		var timeout;
