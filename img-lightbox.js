@@ -1,4 +1,3 @@
-/*global console */
 /*!
  * imgLightbox
  * requires this very img-lightbox.js, and animate.css, img-lightbox.css
@@ -6,32 +5,34 @@
  */
 (function (root, document) {
 	"use strict";
-
 	var docBody = document.body || "";
-
+	
+	var animatedClass = "animated";
 	var appendChild = "appendChild";
 	var classList = "classList";
-	var createDocumentFragment = "createDocumentFragment";
 	var createElement = "createElement";
-	var createTextNode = "createTextNode";
 	var getAttribute = "getAttribute";
 	var getElementsByClassName = "getElementsByClassName";
 	var getElementsByTagName = "getElementsByTagName";
 	var style = "style";
 	var _addEventListener = "addEventListener";
 	var _length = "length";
-	var _removeEventListener = "removeEventListener";
-
-	var isBindedimgLightboxLinkClass = "is-binded-img-lightbox-link";
-
-	var getHTTP = function (force) {
-		var any = force || "";
-		var locationProtocol = root.location.protocol || "";
-		return "http:" === locationProtocol ? "http" : "https:" === locationProtocol ? "https" : any ? "http" : "";
-	};
-
-	var forcedHTTP = getHTTP(true);
-
+	var _removeEventListener = "removeEventListener";	
+	
+	var btnCloseClass = "btn-close";
+	var containerClass = "img-lightbox";
+	
+	var fadeInClass = "fadeIn";
+	var fadeInUpClass = "fadeInUp";
+	var fadeOutClass = "fadeOut";
+	var fadeOutDownClass = "fadeOutDown";
+	
+	var imgLightboxOpenClass = "img-lightbox--open";
+	var imgLightboxLinkIsBindedClass = "img-lightbox-link--is-binded";
+	
+	var isLoadedClass = "is-loaded";
+	
+	var dummySrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
 	var debounce = function (func, wait) {
 		var timeout;
 		var args;
@@ -55,8 +56,7 @@
 			}
 		};
 	};
-
-	var imagePromise = function (s) {
+	/* var imagePromise = function (s) {
 		if (root.Promise) {
 			return new Promise(function (y, n) {
 				var f = function (e, p) {
@@ -84,87 +84,15 @@
 		} else {
 			throw new Error("Promise is not in global object");
 		}
-	};
-
-	var appendFragment = function (e, a) {
-		var parent = a || document[getElementsByTagName]("body")[0] || "";
-		if (e) {
-			var df = document[createDocumentFragment]() || "";
-			if ("string" === typeof e) {
-				e = document[createTextNode](e);
-			}
-			df[appendChild](e);
-			parent[appendChild](df);
-		}
-	};
-
-	/*jshint bitwise: false */
-	var parseLink = function (url, full) {
-		var _full = full || "";
-		return (function () {
-			var _replace = function (s) {
-				return s.replace(/^(#|\?)/, "").replace(/\:$/, "");
-			};
-			var _location = location || "";
-			var _protocol = function (protocol) {
-				switch (protocol) {
-				case "http:":
-					return _full ? ":" + 80 : 80;
-				case "https:":
-					return _full ? ":" + 443 : 443;
-				default:
-					return _full ? ":" + _location.port : _location.port;
-				}
-			};
-			var _isAbsolute = (0 === url.indexOf("//") || !!~url.indexOf("://"));
-			var _locationHref = root.location || "";
-			var _origin = function () {
-				var o = _locationHref.protocol + "//" + _locationHref.hostname + (_locationHref.port ? ":" + _locationHref.port : "");
-				return o || "";
-			};
-			var _isCrossDomain = function () {
-				var c = document[createElement]("a");
-				c.href = url;
-				var v = c.protocol + "//" + c.hostname + (c.port ? ":" + c.port : "");
-				return v !== _origin();
-			};
-			var _link = document[createElement]("a");
-			_link.href = url;
-			return {
-				href: _link.href,
-				origin: _origin(),
-				host: _link.host || _location.host,
-				port: ("0" === _link.port || "" === _link.port) ? _protocol(_link.protocol) : (_full ? _link.port : _replace(_link.port)),
-				hash: _full ? _link.hash : _replace(_link.hash),
-				hostname: _link.hostname || _location.hostname,
-				pathname: _link.pathname.charAt(0) !== "/" ? (_full ? "/" + _link.pathname : _link.pathname) : (_full ? _link.pathname : _link.pathname.slice(1)),
-				protocol: !_link.protocol || ":" === _link.protocol ? (_full ? _location.protocol : _replace(_location.protocol)) : (_full ? _link.protocol : _replace(_link.protocol)),
-				search: _full ? _link.search : _replace(_link.search),
-				query: _full ? _link.search : _replace(_link.search),
-				isAbsolute: _isAbsolute,
-				isRelative: !_isAbsolute,
-				isCrossDomain: _isCrossDomain(),
-				hasHTTP: (/^(http|https):\/\//i).test(url) ? true : false
-			};
-		})();
-	};
-	/*jshint bitwise: true */
-
-	var handleimgLightboxContainer;
-	var handleimgLightboxWindow;
-
-	var handleimgLightboxContainerWithBind;
-	var handleimgLightboxWindowWithBind;
-
-	var hideimgLightbox = function () {
-		var container = document[getElementsByClassName]("img-lightbox-container")[0] || "";
+	}; */
+	var handleImgLightboxContainer;
+	var handleImgLightboxWindow;
+	var handleImgLightboxContainerWithBind;
+	var handleImgLightboxWindowWithBind;
+	var hideImgLightbox = function () {
+		var container = document[getElementsByClassName](containerClass)[0] || "";
 		var img = container ? container[getElementsByTagName]("img")[0] || "" : "";
-		var animatedClass = "animated";
-		var fadeInClass = "fadeIn";
-		var fadeInUpClass = "fadeInUp";
-		var fadeOutClass = "fadeOut";
-		var fadeOutDownClass = "fadeOutDown";
-		var dummySrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
+		var btnClose = container ? container[getElementsByClassName](btnCloseClass)[0] || "" : "";
 		var hideContainer = function () {
 			container[classList].remove(fadeInClass);
 			container[classList].add(fadeOutClass);
@@ -183,10 +111,12 @@
 				}, 400);
 		};
 		if (container && img) {
-			container[_removeEventListener]("click", handleimgLightboxContainer);
-			container[_removeEventListener]("click", handleimgLightboxContainerWithBind);
-			root[_removeEventListener]("keyup", handleimgLightboxWindow);
-			root[_removeEventListener]("keyup", handleimgLightboxWindowWithBind);
+			container[_removeEventListener]("click", handleImgLightboxContainer);
+			container[_removeEventListener]("click", handleImgLightboxContainerWithBind);
+			btnClose[_removeEventListener]("click", handleImgLightboxContainer);
+			btnClose[_removeEventListener]("click", handleImgLightboxContainerWithBind);
+			root[_removeEventListener]("keyup", handleImgLightboxWindow);
+			root[_removeEventListener]("keyup", handleImgLightboxWindowWithBind);
 			img[classList].remove(fadeInUpClass);
 			img[classList].add(fadeOutDownClass);
 			var timer = setTimeout(function () {
@@ -195,8 +125,8 @@
 					hideContainer();
 				}, 400);
 		}
+		docBody[classList].remove(imgLightboxOpenClass);
 	};
-
 	var callCallback = function (func, data) {
 		if (typeof func !== "function") {
 			return;
@@ -204,113 +134,110 @@
 		var caller = func.bind(this);
 		caller(data);
 	};
-
-	handleimgLightboxContainer = function (callback) {
-		var container = document[getElementsByClassName]("img-lightbox-container")[0] || "";
-		if (container) {
-			hideimgLightbox();
-			callCallback(callback, root);
-		}
+	handleImgLightboxContainer = function (callback) {
+		hideImgLightbox();
+		callCallback(callback, root);
 	};
-
-	handleimgLightboxWindow = function (callback, ev) {
+	handleImgLightboxWindow = function (callback, ev) {
 		if (27 === (ev.which || ev.keyCode)) {
-			hideimgLightbox();
+			hideImgLightbox();
 			callCallback(callback, root);
 		}
 	};
-
-	var imgLightbox = function (scope, settings) {
-
-		var ctx = scope && scope.nodeName ? scope : "";
-
+	var imgLightbox = function (linkClass, settings) {
+		var _linkClass = linkClass || "";
 		var options = settings || {};
-
-		var linkClass = "img-lightbox-link";
-		var link = ctx ? ctx[getElementsByClassName](linkClass) || "" : document[getElementsByClassName](linkClass) || "";
-		var containerClass = "img-lightbox-container";
+		var rate = options.rate || 500;
+		var link = document[getElementsByClassName](_linkClass) || "";
 		var container = document[getElementsByClassName](containerClass)[0] || "";
-		var img = container ? container[getElementsByTagName]("img")[0] || "" : "";
-		var animatedClass = "animated";
-		var fadeInClass = "fadeIn";
-		var fadeInUpClass = "fadeInUp";
-		var dummySrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
 		if (!container) {
 			container = document[createElement]("div");
-			img = document[createElement]("img");
-			img.src = dummySrc;
-			img.alt = "";
-			container[appendChild](img);
 			container[classList].add(containerClass);
-			appendFragment(container, docBody);
+			var containerHTML = [];
+			containerHTML.push('<img src="' + dummySrc + '" alt="">');
+			/*!
+			 * @see {@link https://epic-spinners.epicmax.co/}
+			 */
+			containerHTML.push('<div class="half-circle-spinner"><div class="circle circle-1"></div><div class="circle circle-2"></div></div>');
+			containerHTML.push('<a href="javascript:void(0);" class="btn-close"></a>');
+			container.innerHTML = containerHTML.join("");
+			docBody[appendChild](container);
 		}
+		var img = container ? container[getElementsByTagName]("img")[0] || "" : "";
+		var btnClose = container ? container[getElementsByClassName](btnCloseClass)[0] || "" : "";
 		var arrange = function (e) {
-			var handleimgLightboxLink = function (ev) {
+			var hrefString = e[getAttribute]("href") || e[getAttribute]("data-src") || "";
+			if (!hrefString) {
+				return;
+			}
+			var logic = function (ev) {
 				ev.stopPropagation();
 				ev.preventDefault();
-				var _this = this;
-				var logicHandleimgLightboxLink = function () {
-					var hrefString = _this[getAttribute]("href") || "";
-					if (container && img && hrefString) {
-						/* LoadingSpinner.show(); */
-						if (options.onCreated) {
-							callCallback(options.onCreated, root);
-						}
-						container[classList].add(animatedClass);
-						container[classList].add(fadeInClass);
-						img[classList].add(animatedClass);
-						img[classList].add(fadeInUpClass);
-						if (parseLink(hrefString).isAbsolute && !parseLink(hrefString).hasHTTP) {
-							hrefString = hrefString.replace(/^/, forcedHTTP + ":");
-						}
-						imagePromise(hrefString).then(function () {
-							img.src = hrefString;
-							if (options.onLoaded) {
-								callCallback(options.onLoaded, root);
-							}
-						}).catch (function (err) {
-							console.log("cannot load image with imagePromise:", hrefString, err);
-							if (options.onError) {
-								callCallback(options.onError, root);
-							}
-						});
-
-						if (options.onClosed) {
-
-							handleimgLightboxContainerWithBind = handleimgLightboxContainer.bind(null, options.onClosed);
-							handleimgLightboxWindowWithBind = handleimgLightboxWindow.bind(null, options.onClosed);
-
-							container[_addEventListener]("click", handleimgLightboxContainerWithBind);
-							root[_addEventListener]("keyup", handleimgLightboxWindowWithBind);
-						} else {
-							container[_addEventListener]("click", handleimgLightboxContainer);
-							root[_addEventListener]("keyup", handleimgLightboxWindow);
-						}
-						container[style].display = "block";
-						/* LoadingSpinner.hide(); */
+				docBody[classList].add(imgLightboxOpenClass);
+				container[classList].remove(isLoadedClass);
+				var logic = function () {
+					if (options.onCreated) {
+						callCallback(options.onCreated, root);
 					}
+					container[classList].add(animatedClass);
+					container[classList].add(fadeInClass);
+					img[classList].add(animatedClass);
+					img[classList].add(fadeInUpClass);
+					/* imagePromise(hrefString).then(function () {
+						console.log("loaded with imagePromise:", hrefString);
+						container[classList].add(isLoadedClass);
+						img.src = hrefString;
+						if (options.onLoaded) {
+							callCallback(options.onLoaded, root);
+						}
+					}).catch (function () {
+						console.log("cannot load image with imagePromise:", hrefString);
+						if (options.onError) {
+							callCallback(options.onError, root);
+						}
+					}); */
+					img.onload = function () {
+						/* console.log("loaded image:", hrefString); */
+						container[classList].add(isLoadedClass);
+						if (options.onLoaded) {
+							callCallback(options.onLoaded, root);
+						}
+					};
+					img.onerror = function () {
+						/* console.log("cannot load image:", hrefString); */
+						if (options.onError) {
+							callCallback(options.onError, root);
+						}
+					};
+					img.src = hrefString;
+					if (options.onClosed) {
+						handleImgLightboxContainerWithBind = handleImgLightboxContainer.bind(null, options.onClosed);
+						handleImgLightboxWindowWithBind = handleImgLightboxWindow.bind(null, options.onClosed);
+						container[_addEventListener]("click", handleImgLightboxContainerWithBind);
+						btnClose[_addEventListener]("click", handleImgLightboxContainerWithBind);
+						root[_addEventListener]("keyup", handleImgLightboxWindowWithBind);
+					} else {
+						container[_addEventListener]("click", handleImgLightboxContainer);
+						btnClose[_addEventListener]("click", handleImgLightboxContainer);
+						root[_addEventListener]("keyup", handleImgLightboxWindow);
+					}
+					container[style].display = "block";
 				};
-				var debounceLogicHandleimgLightboxLink = debounce(logicHandleimgLightboxLink, 200);
-				debounceLogicHandleimgLightboxLink();
+				debounce(logic, rate).call();
 			};
-			if (!e[classList].contains(isBindedimgLightboxLinkClass)) {
-				var hrefString = e[getAttribute]("href") || "";
-				if (hrefString) {
-					if (parseLink(hrefString).isAbsolute && !parseLink(hrefString).hasHTTP) {
-						e.setAttribute("href", hrefString.replace(/^/, forcedHTTP + ":"));
-					}
-					e[_addEventListener]("click", handleimgLightboxLink);
-					e[classList].add(isBindedimgLightboxLinkClass);
-				}
+			if (!e[classList].contains(imgLightboxLinkIsBindedClass)) {
+				e[classList].add(imgLightboxLinkIsBindedClass);
+				e[_addEventListener]("click", logic);
 			}
 		};
-		if (link) {
-			for (var j = 0, l = link[_length]; j < l; j += 1) {
-				arrange(link[j]);
+		if (container && img && link) {
+			var i,
+			l;
+			for (i = 0, l = link[_length]; i < l; i += 1) {
+				arrange(link[i]);
 			}
-			/* forEach(link, arrange, false); */
+			i = l = null;
 		}
 	};
-
 	root.imgLightbox = imgLightbox;
 })("undefined" !== typeof window ? window : this, document);

@@ -23,7 +23,11 @@ Responsive no-jQuery pure JS/CSS Lightbox for images, no dependencies, 10kb unmi
 
 * SPA / PWA friendly: prevents multiple same events assigning
 
-* Debounced launch
+* Debounced launch, default 500ms, custom rate can be set with rate property of options object
+
+* Preloading spinner that is unset after onload event succeeds
+
+* Pure CSS Retina Ready UI images, no external ones (prompted by github.com/jasomdotnet, thanks)
 
 * Custom event callbacks
 
@@ -31,15 +35,15 @@ Responsive no-jQuery pure JS/CSS Lightbox for images, no dependencies, 10kb unmi
 
 #### jsDelivr
 
-`https://cdn.jsdelivr.net/gh/englishextra/img-lightbox@0.1.2/img-lightbox.min.js`
+`https://cdn.jsdelivr.net/gh/englishextra/img-lightbox@latest/img-lightbox.min.js`
 
-`https://cdn.jsdelivr.net/gh/englishextra/img-lightbox@0.1.2/img-lightbox.min.css`
+`https://cdn.jsdelivr.net/gh/englishextra/img-lightbox@latest/img-lightbox.min.css`
 
 #### unpkg
 
-`https://unpkg.com/img-lightbox@0.1.2/img-lightbox.js`
+`https://unpkg.com/img-lightbox@latest/img-lightbox.js`
 
-`https://unpkg.com/img-lightbox@0.1.2/img-lightbox.css`
+`https://unpkg.com/img-lightbox@latest/img-lightbox.css`
 
 ### Install
 
@@ -53,9 +57,11 @@ Responsive no-jQuery pure JS/CSS Lightbox for images, no dependencies, 10kb unmi
 
 ### Setup
 
-`class` "img-lightbox-link" is required and hardcoded.
+`class` "img-lightbox-link" can be any name you choose.
 
-`data-src` is required, and contains URL of your image.
+`data-src` is deprecated, but supported for compatibility.
+
+`href` is required, and contains URL of your image.
 
 [![Build Status](https://farm1.staticflickr.com/955/27854475488_5f82a379ca_z.jpg)](https://farm1.staticflickr.com/955/27854475488_5f82a379ca_z.jpg)
 
@@ -70,37 +76,38 @@ rel="lightbox"><img src="https://farm1.staticflickr.com/955/27854475488_5f82a379
 ## Initialize
 
 ```javascript
-imgLightbox(document.body || "");
+imgLightbox("img-lightbox-link");
 ```
 
 ## Tips
 
 SPA / PWA developers don't need to bother: built-in class is added to a link.
 
- That way you avoid multiple assignments to a single element.
+That way you avoid multiple assignments to a single element.
 
 ## Examples of event handling
 
  ```javascript
-var manageImgLightboxLinks = function (root, scope) {
-  var ctx = scope && scope.nodeName ? scope : "";
-  if (root.imgLightbox) {
-    imgLightbox(ctx, {
-      onCreated: function () {
-        // show your preloader
-      },
-      onLoaded: function () {
-        // hide your preloader
-      },
-      onError: function () {
-        // hide your preloader
-      },
-      onClosed: function () {
-        // hide your preloader
-      }
-    });
-  }
-};
+(function(root){
+	"use strict";
+	if (root.imgLightbox) {
+		imgLightbox("img-lightbox-link", {
+			onCreated: function () {
+				/* show your preloader */
+			},
+			onLoaded: function () {
+				/* hide your preloader */
+			},
+			onError: function () {
+				/* hide your preloader */
+			},
+			onClosed: function () {
+				/* hide your preloader */
+			},
+			rate: 500 /* default: 500 */
+		});
+	}
+})("undefined" !== typeof window ? window : this);
 manageImgLightboxLinks("undefined" !== typeof window ? window : this, document.body || "");
 ```
 
