@@ -88,27 +88,26 @@ That way you avoid multiple assignments to a single element.
 ## Examples of event handling
 
  ```javascript
-(function(root){
+(function(root) {
 	"use strict";
 	if (root.imgLightbox) {
 		imgLightbox("img-lightbox-link", {
-			onCreated: function () {
+			onCreated: function() {
 				/* show your preloader */
 			},
-			onLoaded: function () {
+			onLoaded: function() {
 				/* hide your preloader */
 			},
-			onError: function () {
+			onError: function() {
 				/* hide your preloader */
 			},
-			onClosed: function () {
+			onClosed: function() {
 				/* hide your preloader */
 			},
 			rate: 500 /* default: 500 */
 		});
 	}
 })("undefined" !== typeof window ? window : this);
-manageImgLightboxLinks("undefined" !== typeof window ? window : this, document.body || "");
 ```
 
 ## GitHub
