@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.1.7 - 2018-12-19
+### Changed
+- Fixed binding custom events bug
+
 ## 0.1.6 - 2018-12-19
 ### Changed
 - Fixed jshint warning

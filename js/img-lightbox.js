@@ -1,6 +1,10 @@
 /*!
+ * @see {@link https://github.com/englishextra/img-lightbox}
  * imgLightbox
  * requires this very img-lightbox.js, and animate.css, img-lightbox.css
+ * @params {String} linkClass
+ * @params {Object} settings object
+ * imgLightbox(linkClass, settings)
  * passes jshint
  */
 
@@ -19,8 +23,6 @@
 	var style = "style";
 	var _addEventListener = "addEventListener";
 	var _length = "length";
-	/* var _removeEventListener = "removeEventListener"; */
-
 	var btnCloseClass = "btn-close";
 	var containerClass = "img-lightbox";
 	var fadeInClass = "fadeIn";
@@ -59,40 +61,17 @@
 			}
 		};
 	};
-	/* var imagePromise = function (s) {
-  	if (root.Promise) {
-  		return new Promise(function (y, n) {
-  			var f = function (e, p) {
-  				e.onload = function () {
-  					y(p);
-  				};
-  				e.onerror = function () {
-  					n(p);
-  				};
-  				e.src = p;
-  			};
-  			if ("string" === typeof s) {
-  				var a = new Image();
-  				f(a, s);
-  			} else {
-  				if ("img" !== s.tagName) {
-  					return Promise.reject();
-  				} else {
-  					if (s.src) {
-  						f(s, s.src);
-  					}
-  				}
-  			}
-  		});
-  	} else {
-  		throw new Error("Promise is not in global object");
-  	}
-  }; */
 
-	var handleImgLightboxContainer;
-	var handleImgLightboxWindow;
+	var callCallback = function callCallback(func, data) {
+		if (typeof func !== "function") {
+			return;
+		}
 
-	var hideImgLightbox = function hideImgLightbox() {
+		var caller = func.bind(this);
+		caller(data);
+	};
+
+	var hideImgLightbox = function hideImgLightbox(callback) {
 		var container =
 			document[getElementsByClassName](containerClass)[0] || "";
 		var img = container
@@ -115,6 +94,7 @@
 
 				img.src = dummySrc;
 				container[style].display = "none";
+				callCallback(callback, root);
 			};
 
 			var timer = setTimeout(function() {
@@ -137,45 +117,20 @@
 		docBody[classList].remove(imgLightboxOpenClass);
 	};
 
-	var callCallback = function callCallback(func, data) {
-		if (typeof func !== "function") {
-			return;
-		}
-
-		var caller = func.bind(this);
-		caller(data);
-	};
-
-	handleImgLightboxContainer = function handleImgLightboxContainer(callback) {
-		hideImgLightbox();
-		callCallback(callback, root);
-	};
-
-	handleImgLightboxWindow = function handleImgLightboxWindow(callback, ev) {
-		var evt = ev || root.event;
-
-		if (27 === (evt.which || evt.keyCode)) {
-			hideImgLightbox();
-			callCallback(callback, root);
-		}
-	};
-
 	var imgLightbox = function imgLightbox(linkClass, settings) {
 		var _linkClass = linkClass || "";
 
 		var options = settings || {};
 		var rate = options.rate || 500;
+		var onError = options.onError;
+		var onLoaded = options.onLoaded;
+		var onCreated = options.onCreated;
+		var onClosed = options.onClosed;
 		var link = document[getElementsByClassName](_linkClass) || "";
 		var container = document[createElement]("div");
 		container[classList].add(containerClass);
 		var html = [];
 		html.push('<img src="' + dummySrc + '" alt="" />');
-		/*!
-		 * @see {@link https://epic-spinners.epicmax.co/}
-		 */
-
-		/*html.push('<div class="spring-spinner"><div class="spring-spinner-part top"><div class="spring-spinner-rotator"></div></div><div class="spring-spinner-part bottom"><div class="spring-spinner-rotator"></div></div></div>');*/
-
 		html.push(
 			'<div class="half-circle-spinner"><div class="circle circle-1"></div><div class="circle circle-2"></div></div>'
 		);
@@ -190,6 +145,20 @@
 			? container[getElementsByClassName](btnCloseClass)[0] || ""
 			: "";
 
+		var handleImgLightboxContainer = function handleImgLightboxContainer() {
+			hideImgLightbox(onClosed);
+		};
+
+		container[_addEventListener]("click", handleImgLightboxContainer);
+
+		btnClose[_addEventListener]("click", handleImgLightboxContainer);
+
+		root[_addEventListener]("keyup", function(ev) {
+			if (27 === (ev.which || ev.keyCode)) {
+				hideImgLightbox(onClosed);
+			}
+		});
+
 		var arrange = function arrange(e) {
 			var hrefString =
 				e[getAttribute]("href") || e[getAttribute]("data-src") || "";
@@ -198,91 +167,37 @@
 				return;
 			}
 
-			var logic = function logic(ev) {
+			var handleImgLightboxLink = function handleImgLightboxLink(ev) {
 				ev.stopPropagation();
 				ev.preventDefault();
 				docBody[classList].add(imgLightboxOpenClass);
 				container[classList].remove(isLoadedClass);
 
 				var logic = function logic() {
-					if (options.onCreated) {
-						callCallback(options.onCreated, root);
+					if (onCreated) {
+						callCallback(onCreated, root);
 					}
 
 					container[classList].add(animatedClass);
 					container[classList].add(fadeInClass);
 					img[classList].add(animatedClass);
 					img[classList].add(fadeInUpClass);
-					/* imagePromise(hrefString).then(function () {
-          	console.log("loaded with imagePromise:", hrefString);
-          	container[classList].add(isLoadedClass);
-          	img.src = hrefString;
-          	if (options.onLoaded) {
-          		callCallback(options.onLoaded, root);
-          	}
-          }).catch (function () {
-          	console.log("cannot load image with imagePromise:", hrefString);
-          	if (options.onError) {
-          		callCallback(options.onError, root);
-          	}
-          }); */
 
 					img.onload = function() {
-						/* console.log("loaded image:", hrefString); */
 						container[classList].add(isLoadedClass);
 
-						if (options.onLoaded) {
-							callCallback(options.onLoaded, root);
+						if (onLoaded) {
+							callCallback(onLoaded, root);
 						}
 					};
 
 					img.onerror = function() {
-						/* console.log("cannot load image:", hrefString); */
-						if (options.onError) {
-							callCallback(options.onError, root);
+						if (onError) {
+							callCallback(onError, root);
 						}
 					};
 
 					img.src = hrefString;
-
-					if (options.onClosed) {
-						container[_addEventListener](
-							"click",
-							handleImgLightboxContainer.bind(
-								null,
-								options.onClosed
-							)
-						);
-
-						btnClose[_addEventListener](
-							"click",
-							handleImgLightboxContainer.bind(
-								null,
-								options.onClosed
-							)
-						);
-
-						root[_addEventListener](
-							"keyup",
-							handleImgLightboxWindow.bind(null, options.onClosed)
-						);
-					} else {
-						container[_addEventListener](
-							"click",
-							handleImgLightboxContainer
-						);
-
-						btnClose[_addEventListener](
-							"click",
-							handleImgLightboxContainer
-						);
-
-						root[_addEventListener](
-							"keyup",
-							handleImgLightboxWindow
-						);
-					}
-
 					container[style].display = "block";
 				};
 
@@ -292,7 +207,7 @@
 			if (!e[classList].contains(imgLightboxLinkIsBindedClass)) {
 				e[classList].add(imgLightboxLinkIsBindedClass);
 
-				e[_addEventListener]("click", logic);
+				e[_addEventListener]("click", handleImgLightboxLink);
 			}
 		};
 
