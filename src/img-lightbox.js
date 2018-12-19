@@ -164,7 +164,7 @@
 		container.innerHTML = html.join("");
 		docBody[appendChild](container);
 
-		var container = document[getElementsByClassName](containerClass)[0] || "";
+		container = document[getElementsByClassName](containerClass)[0] || "";
 		var img = container ? container[getElementsByTagName]("img")[0] || "" : "";
 		var btnClose = container ? container[getElementsByClassName](btnCloseClass)[0] || "" : "";
 		var arrange = function (e) {
