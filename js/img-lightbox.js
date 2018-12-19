@@ -3,6 +3,8 @@
  * requires this very img-lightbox.js, and animate.css, img-lightbox.css
  * passes jshint
  */
+
+/*jshint -W014 */
 (function(root, document) {
 	"use strict";
 
@@ -17,7 +19,8 @@
 	var style = "style";
 	var _addEventListener = "addEventListener";
 	var _length = "length";
-	var _removeEventListener = "removeEventListener";
+	/* var _removeEventListener = "removeEventListener"; */
+
 	var btnCloseClass = "btn-close";
 	var containerClass = "img-lightbox";
 	var fadeInClass = "fadeIn";
@@ -88,17 +91,12 @@
 
 	var handleImgLightboxContainer;
 	var handleImgLightboxWindow;
-	var handleImgLightboxContainerWithBind;
-	var handleImgLightboxWindowWithBind;
 
 	var hideImgLightbox = function hideImgLightbox() {
 		var container =
 			document[getElementsByClassName](containerClass)[0] || "";
 		var img = container
 			? container[getElementsByTagName]("img")[0] || ""
-			: "";
-		var btnClose = container
-			? container[getElementsByClassName](btnCloseClass)[0] || ""
 			: "";
 
 		var hideContainer = function hideContainer() {
@@ -110,6 +108,11 @@
 				container[classList].remove(fadeOutClass);
 				img[classList].remove(animatedClass);
 				img[classList].remove(fadeOutDownClass);
+
+				img.onload = function() {
+					container[classList].remove(isLoadedClass);
+				};
+
 				img.src = dummySrc;
 				container[style].display = "none";
 			};
@@ -122,30 +125,6 @@
 		};
 
 		if (container && img) {
-			container[_removeEventListener](
-				"click",
-				handleImgLightboxContainer
-			);
-
-			container[_removeEventListener](
-				"click",
-				handleImgLightboxContainerWithBind
-			);
-
-			btnClose[_removeEventListener]("click", handleImgLightboxContainer);
-
-			btnClose[_removeEventListener](
-				"click",
-				handleImgLightboxContainerWithBind
-			);
-
-			root[_removeEventListener]("keyup", handleImgLightboxWindow);
-
-			root[_removeEventListener](
-				"keyup",
-				handleImgLightboxWindowWithBind
-			);
-
 			img[classList].remove(fadeInUpClass);
 			img[classList].add(fadeOutDownClass);
 			var timer = setTimeout(function() {
@@ -173,7 +152,9 @@
 	};
 
 	handleImgLightboxWindow = function handleImgLightboxWindow(callback, ev) {
-		if (27 === (ev.which || ev.keyCode)) {
+		var evt = ev || root.event;
+
+		if (27 === (evt.which || evt.keyCode)) {
 			hideImgLightbox();
 			callCallback(callback, root);
 		}
@@ -185,28 +166,24 @@
 		var options = settings || {};
 		var rate = options.rate || 500;
 		var link = document[getElementsByClassName](_linkClass) || "";
+		var container = document[createElement]("div");
+		container[classList].add(containerClass);
+		var html = [];
+		html.push('<img src="' + dummySrc + '" alt="" />');
+		/*!
+		 * @see {@link https://epic-spinners.epicmax.co/}
+		 */
+
+		/*html.push('<div class="spring-spinner"><div class="spring-spinner-part top"><div class="spring-spinner-rotator"></div></div><div class="spring-spinner-part bottom"><div class="spring-spinner-rotator"></div></div></div>');*/
+
+		html.push(
+			'<div class="half-circle-spinner"><div class="circle circle-1"></div><div class="circle circle-2"></div></div>'
+		);
+		html.push('<a href="javascript:void(0);" class="btn-close"></a>');
+		container.innerHTML = html.join("");
+		docBody[appendChild](container);
 		var container =
 			document[getElementsByClassName](containerClass)[0] || "";
-
-		if (!container) {
-			container = document[createElement]("div");
-			container[classList].add(containerClass);
-			var containerHTML = [];
-			containerHTML.push('<img src="' + dummySrc + '" alt="">');
-			/*!
-			 * @see {@link https://epic-spinners.epicmax.co/}
-			 */
-
-			containerHTML.push(
-				'<div class="half-circle-spinner"><div class="circle circle-1"></div><div class="circle circle-2"></div></div>'
-			);
-			containerHTML.push(
-				'<a href="javascript:void(0);" class="btn-close"></a>'
-			);
-			container.innerHTML = containerHTML.join("");
-			docBody[appendChild](container);
-		}
-
 		var img = container
 			? container[getElementsByTagName]("img")[0] || ""
 			: "";
@@ -270,28 +247,25 @@
 					img.src = hrefString;
 
 					if (options.onClosed) {
-						handleImgLightboxContainerWithBind = handleImgLightboxContainer.bind(
-							null,
-							options.onClosed
-						);
-						handleImgLightboxWindowWithBind = handleImgLightboxWindow.bind(
-							null,
-							options.onClosed
-						);
-
 						container[_addEventListener](
 							"click",
-							handleImgLightboxContainerWithBind
+							handleImgLightboxContainer.bind(
+								null,
+								options.onClosed
+							)
 						);
 
 						btnClose[_addEventListener](
 							"click",
-							handleImgLightboxContainerWithBind
+							handleImgLightboxContainer.bind(
+								null,
+								options.onClosed
+							)
 						);
 
 						root[_addEventListener](
 							"keyup",
-							handleImgLightboxWindowWithBind
+							handleImgLightboxWindow.bind(null, options.onClosed)
 						);
 					} else {
 						container[_addEventListener](

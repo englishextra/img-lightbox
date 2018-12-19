@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.1.5 - 2018-12-19
+### Changed
+- Fixed on ESC key event bug
+
 ## 0.1.4 - 2018-12-18
 ### Changed
 - Reorginized the file tree of the library

@@ -3,6 +3,7 @@
  * requires this very img-lightbox.js, and animate.css, img-lightbox.css
  * passes jshint
  */
+/*jshint -W014 */
 (function (root, document) {
 	"use strict";
 	var docBody = document.body || "";
@@ -17,7 +18,7 @@
 	var style = "style";
 	var _addEventListener = "addEventListener";
 	var _length = "length";
-	var _removeEventListener = "removeEventListener";
+	/* var _removeEventListener = "removeEventListener"; */
 
 	var btnCloseClass = "btn-close";
 	var containerClass = "img-lightbox";
@@ -33,6 +34,7 @@
 	var isLoadedClass = "is-loaded";
 
 	var dummySrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
+
 	var debounce = function (func, wait) {
 		var timeout;
 		var args;
@@ -56,6 +58,7 @@
 			}
 		};
 	};
+
 	/* var imagePromise = function (s) {
 		if (root.Promise) {
 			return new Promise(function (y, n) {
@@ -85,14 +88,13 @@
 			throw new Error("Promise is not in global object");
 		}
 	}; */
+
 	var handleImgLightboxContainer;
 	var handleImgLightboxWindow;
-	var handleImgLightboxContainerWithBind;
-	var handleImgLightboxWindowWithBind;
+
 	var hideImgLightbox = function () {
 		var container = document[getElementsByClassName](containerClass)[0] || "";
 		var img = container ? container[getElementsByTagName]("img")[0] || "" : "";
-		var btnClose = container ? container[getElementsByClassName](btnCloseClass)[0] || "" : "";
 		var hideContainer = function () {
 			container[classList].remove(fadeInClass);
 			container[classList].add(fadeOutClass);
@@ -101,6 +103,9 @@
 				container[classList].remove(fadeOutClass);
 				img[classList].remove(animatedClass);
 				img[classList].remove(fadeOutDownClass);
+				img.onload = function () {
+					container[classList].remove(isLoadedClass);
+				};
 				img.src = dummySrc;
 				container[style].display = "none";
 			};
@@ -111,12 +116,6 @@
 				}, 400);
 		};
 		if (container && img) {
-			container[_removeEventListener]("click", handleImgLightboxContainer);
-			container[_removeEventListener]("click", handleImgLightboxContainerWithBind);
-			btnClose[_removeEventListener]("click", handleImgLightboxContainer);
-			btnClose[_removeEventListener]("click", handleImgLightboxContainerWithBind);
-			root[_removeEventListener]("keyup", handleImgLightboxWindow);
-			root[_removeEventListener]("keyup", handleImgLightboxWindowWithBind);
 			img[classList].remove(fadeInUpClass);
 			img[classList].add(fadeOutDownClass);
 			var timer = setTimeout(function () {
@@ -139,7 +138,8 @@
 		callCallback(callback, root);
 	};
 	handleImgLightboxWindow = function (callback, ev) {
-		if (27 === (ev.which || ev.keyCode)) {
+		var evt = ev || root.event;
+		if (27 === (evt.which || evt.keyCode)) {
 			hideImgLightbox();
 			callCallback(callback, root);
 		}
@@ -149,20 +149,22 @@
 		var options = settings || {};
 		var rate = options.rate || 500;
 		var link = document[getElementsByClassName](_linkClass) || "";
+
+		var container = document[createElement]("div");
+		container[classList].add(containerClass);
+
+		var html = [];
+		html.push('<img src="' + dummySrc + '" alt="" />');
+		/*!
+		 * @see {@link https://epic-spinners.epicmax.co/}
+		 */
+		/*html.push('<div class="spring-spinner"><div class="spring-spinner-part top"><div class="spring-spinner-rotator"></div></div><div class="spring-spinner-part bottom"><div class="spring-spinner-rotator"></div></div></div>');*/
+		html.push('<div class="half-circle-spinner"><div class="circle circle-1"></div><div class="circle circle-2"></div></div>');
+		html.push('<a href="javascript:void(0);" class="btn-close"></a>');
+		container.innerHTML = html.join("");
+		docBody[appendChild](container);
+
 		var container = document[getElementsByClassName](containerClass)[0] || "";
-		if (!container) {
-			container = document[createElement]("div");
-			container[classList].add(containerClass);
-			var containerHTML = [];
-			containerHTML.push('<img src="' + dummySrc + '" alt="">');
-			/*!
-			 * @see {@link https://epic-spinners.epicmax.co/}
-			 */
-			containerHTML.push('<div class="half-circle-spinner"><div class="circle circle-1"></div><div class="circle circle-2"></div></div>');
-			containerHTML.push('<a href="javascript:void(0);" class="btn-close"></a>');
-			container.innerHTML = containerHTML.join("");
-			docBody[appendChild](container);
-		}
 		var img = container ? container[getElementsByTagName]("img")[0] || "" : "";
 		var btnClose = container ? container[getElementsByClassName](btnCloseClass)[0] || "" : "";
 		var arrange = function (e) {
@@ -183,6 +185,7 @@
 					container[classList].add(fadeInClass);
 					img[classList].add(animatedClass);
 					img[classList].add(fadeInUpClass);
+
 					/* imagePromise(hrefString).then(function () {
 						console.log("loaded with imagePromise:", hrefString);
 						container[classList].add(isLoadedClass);
@@ -196,6 +199,7 @@
 							callCallback(options.onError, root);
 						}
 					}); */
+
 					img.onload = function () {
 						/* console.log("loaded image:", hrefString); */
 						container[classList].add(isLoadedClass);
@@ -210,12 +214,11 @@
 						}
 					};
 					img.src = hrefString;
+
 					if (options.onClosed) {
-						handleImgLightboxContainerWithBind = handleImgLightboxContainer.bind(null, options.onClosed);
-						handleImgLightboxWindowWithBind = handleImgLightboxWindow.bind(null, options.onClosed);
-						container[_addEventListener]("click", handleImgLightboxContainerWithBind);
-						btnClose[_addEventListener]("click", handleImgLightboxContainerWithBind);
-						root[_addEventListener]("keyup", handleImgLightboxWindowWithBind);
+						container[_addEventListener]("click", handleImgLightboxContainer.bind(null, options.onClosed));
+						btnClose[_addEventListener]("click", handleImgLightboxContainer.bind(null, options.onClosed));
+						root[_addEventListener]("keyup", handleImgLightboxWindow.bind(null, options.onClosed));
 					} else {
 						container[_addEventListener]("click", handleImgLightboxContainer);
 						btnClose[_addEventListener]("click", handleImgLightboxContainer);
