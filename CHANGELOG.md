@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.1.8 - 2018-12-20
+### Changed
+- Added touch events support https://github.com/englishextra/iframe-lightbox/issues/16
+
 ## 0.1.7 - 2018-12-19
 ### Changed
 - Fixed binding custom events bug

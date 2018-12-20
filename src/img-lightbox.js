@@ -18,6 +18,7 @@
 	var getAttribute = "getAttribute";
 	var getElementsByClassName = "getElementsByClassName";
 	var getElementsByTagName = "getElementsByTagName";
+	var innerHTML = "innerHTML";
 	var style = "style";
 	var _addEventListener = "addEventListener";
 	var _length = "length";
@@ -31,7 +32,11 @@
 	var imgLightboxLinkIsBindedClass = "img-lightbox-link--is-binded";
 	var isLoadedClass = "is-loaded";
 	var dummySrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
-	var debounce = function debounce(func, wait) {
+
+	var isMobile = navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(Android)|(PlayBook)|(BB10)|(BlackBerry)|(Opera Mini)|(IEMobile)|(webOS)|(MeeGo)/i);
+	var isTouch = isMobile !== null || document.createTouch !== undefined || "ontouchstart" in root || "onmsgesturechange" in root || navigator.msMaxTouchPoints;
+
+	var debounce = function (func, wait) {
 		var timeout;
 		var args;
 		var context;
@@ -40,7 +45,7 @@
 			context = this;
 			args = [].slice.call(arguments, 0);
 			timestamp = new Date();
-			var later = function later() {
+			var later = function () {
 				var last = new Date() - timestamp;
 				if (last < wait) {
 					timeout = setTimeout(later, wait - last);
@@ -54,20 +59,20 @@
 			}
 		};
 	};
-	var callCallback = function callCallback(func, data) {
+	var callCallback = function (func, data) {
 		if (typeof func !== "function") {
 			return;
 		}
 		var caller = func.bind(this);
 		caller(data);
 	};
-	var hideImgLightbox = function hideImgLightbox(callback) {
+	var hideImgLightbox = function (callback) {
 		var container = document[getElementsByClassName](containerClass)[0] || "";
 		var img = container ? container[getElementsByTagName]("img")[0] || "" : "";
 		var hideContainer = function () {
 			container[classList].remove(fadeInClass);
 			container[classList].add(fadeOutClass);
-			var hideImg = function hideImg() {
+			var hideImg = function () {
 				container[classList].remove(animatedClass);
 				container[classList].remove(fadeOutClass);
 				img[classList].remove(animatedClass);
@@ -96,7 +101,7 @@
 		}
 		docBody[classList].remove(imgLightboxOpenClass);
 	};
-	var imgLightbox = function imgLightbox(linkClass, settings) {
+	var imgLightbox = function (linkClass, settings) {
 		var _linkClass = linkClass || "";
 		var options = settings || {};
 		var rate = options.rate || 500;
@@ -111,7 +116,7 @@
 		html.push('<img src="' + dummySrc + '" alt="" />');
 		html.push('<div class="half-circle-spinner"><div class="circle circle-1"></div><div class="circle circle-2"></div></div>');
 		html.push('<a href="javascript:void(0);" class="btn-close"></a>');
-		container.innerHTML = html.join("");
+		container[innerHTML] = html.join("");
 		docBody[appendChild](container);
 		container = document[getElementsByClassName](containerClass)[0] || "";
 		var img = container ? container[getElementsByTagName]("img")[0] || "" : "";
@@ -120,18 +125,24 @@
 			hideImgLightbox(onClosed);
 		};
 		container[_addEventListener]("click", handleImgLightboxContainer);
+		if (isTouch) {
+			container[_addEventListener]("touchstart", handleImgLightboxContainer);
+		}
 		btnClose[_addEventListener]("click", handleImgLightboxContainer);
+		if (isTouch) {
+			btnClose[_addEventListener]("touchstart", handleImgLightboxContainer);
+		}
 		root[_addEventListener]("keyup", function (ev) {
 			if (27 === (ev.which || ev.keyCode)) {
 				hideImgLightbox(onClosed);
 			}
 		});
-		var arrange = function arrange(e) {
+		var arrange = function (e) {
 			var hrefString = e[getAttribute]("href") || e[getAttribute]("data-src") || "";
 			if (!hrefString) {
 				return;
 			}
-			var handleImgLightboxLink = function handleImgLightboxLink(ev) {
+			var handleImgLightboxLink = function (ev) {
 				ev.stopPropagation();
 				ev.preventDefault();
 				docBody[classList].add(imgLightboxOpenClass);
@@ -163,6 +174,9 @@
 			if (!e[classList].contains(imgLightboxLinkIsBindedClass)) {
 				e[classList].add(imgLightboxLinkIsBindedClass);
 				e[_addEventListener]("click", handleImgLightboxLink);
+				if (isTouch) {
+					e[_addEventListener]("touchstart", handleImgLightboxLink);
+				}
 			}
 		};
 		if (container && img && link) {
