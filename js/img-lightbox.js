@@ -160,22 +160,14 @@
 		};
 
 		container[_addEventListener]("click", handleImgLightboxContainer);
-
-		if (isTouch) {
-			container[_addEventListener](
-				"touchstart",
-				handleImgLightboxContainer
-			);
-		}
+		/* if (isTouch) {
+    	container[_addEventListener]("touchstart", handleImgLightboxContainer);
+    } */
 
 		btnClose[_addEventListener]("click", handleImgLightboxContainer);
-
-		if (isTouch) {
-			btnClose[_addEventListener](
-				"touchstart",
-				handleImgLightboxContainer
-			);
-		}
+		/* if (isTouch) {
+    	btnClose[_addEventListener]("touchstart", handleImgLightboxContainer);
+    } */
 
 		root[_addEventListener]("keyup", function(ev) {
 			if (27 === (ev.which || ev.keyCode)) {
