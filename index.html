@@ -92,6 +92,9 @@
 class=&quot;img-lightbox-link&quot;
 aria-hidden=&quot;true&quot;
 rel=&quot;lightbox&quot;&gt;&lt;img src=&quot;https://farm1.staticflickr.com/955/27854475488_5f82a379ca_z.jpg&quot; alt=&quot;Image Lightbox&quot; /&gt;&lt;/a&gt;</code></pre>
+<p>For those who don't use 3rd-party scripts that interfere with links behaviour and don't force <code>window.location</code> they have no need in either <code>data-touch="true"</code> or <code>{touch: true}</code>.</p>
+<p>When you have scripts that interfere, then to keep lightbox working, use <code>{touch: true}</code> or <code>data-touch="true"</code>.</p>
+<p><code>data-src</code> or <code>href</code> doesn't matter, but you shouldn't enable <code>touch</code> override if you have a full screen image in a lighbox link and have no other space to scroll down.</p>
 	<h2>Initialize</h2>
 	<pre><code>imgLightbox(&quot;img-lightbox-link&quot;);</code></pre>
 	<h2>Tips</h2>
