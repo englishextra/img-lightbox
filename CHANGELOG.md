@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.2.0 - 2018-12-21
+### Changed
+- Added touchstart surpress to prevent Wordpress takeover https://github.com/englishextra/iframe-lightbox/issues/17
+
 ## 0.1.9 - 2018-12-20
 ### Changed
 - Fixed CSS minification https://github.com/englishextra/iframe-lightbox/issues/17

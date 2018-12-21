@@ -35,15 +35,15 @@ Responsive no-jQuery pure JS/CSS Lightbox for images, no dependencies, 10kb unmi
 
 #### jsDelivr
 
-`https://cdn.jsdelivr.net/gh/englishextra/img-lightbox@0.1.9/js/img-lightbox.min.js`
+`https://cdn.jsdelivr.net/gh/englishextra/img-lightbox@0.2.0/js/img-lightbox.min.js`
 
-`https://cdn.jsdelivr.net/gh/englishextra/img-lightbox@0.1.9/css/img-lightbox.min.css`
+`https://cdn.jsdelivr.net/gh/englishextra/img-lightbox@0.2.0/css/img-lightbox.min.css`
 
 #### unpkg
 
-`https://unpkg.com/img-lightbox@0.1.9/js/img-lightbox.js`
+`https://unpkg.com/img-lightbox@0.2.0/js/img-lightbox.js`
 
-`https://unpkg.com/img-lightbox@0.1.9/css/img-lightbox.css`
+`https://unpkg.com/img-lightbox@0.2.0/css/img-lightbox.css`
 
 ### Install
 
@@ -104,7 +104,8 @@ That way you avoid multiple assignments to a single element.
 			onClosed: function() {
 				/* hide your preloader */
 			},
-			rate: 500 /* default: 500 */
+			rate: 500 /* default: 500 */,
+			touch: false /* default: false - use with care for responsive images in links on vertical mobile screens */
 		});
 	}
 })("undefined" !== typeof window ? window : this);

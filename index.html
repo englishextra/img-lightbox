@@ -141,7 +141,8 @@ rel=&quot;lightbox&quot;&gt;&lt;img src=&quot;https://farm1.staticflickr.com/955
 				onClosed: function() {
 					/* hide your preloader */
 				},
-				rate: 500 /* default: 500 */
+				rate: 500 /* default: 500 */,
+				touch: false /* default: false - use with care for responsive images in links on vertical mobile screens */
 			});
 		}
 	})("undefined" !== typeof window ? window : this);
