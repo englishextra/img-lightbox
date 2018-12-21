@@ -105,6 +105,7 @@
 		var _linkClass = linkClass || "";
 		var options = settings || {};
 		var rate = options.rate || 500;
+		var touch = options.touch;
 		var onError = options.onError;
 		var onLoaded = options.onLoaded;
 		var onCreated = options.onCreated;
@@ -138,7 +139,12 @@
 			}
 		});
 		var arrange = function (e) {
-			var hrefString = e[getAttribute]("href") || e[getAttribute]("data-src") || "";
+			var hrefString =
+				e[getAttribute]("href") || e[getAttribute]("data-src") || "";
+
+			var dataTouch =
+				e[getAttribute]("data-touch") || "";
+
 			if (!hrefString) {
 				return;
 			}
@@ -174,7 +180,7 @@
 			if (!e[classList].contains(imgLightboxLinkIsBindedClass)) {
 				e[classList].add(imgLightboxLinkIsBindedClass);
 				e[_addEventListener]("click", handleImgLightboxLink);
-				if (isTouch) {
+				if (isTouch && (touch || dataTouch)) {
 					e[_addEventListener]("touchstart", handleImgLightboxLink);
 				}
 			}
