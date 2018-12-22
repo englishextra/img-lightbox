@@ -12,6 +12,7 @@
 (function(root, document) {
 	"use strict";
 
+	var docElem = document.documentElement || "";
 	var docBody = document.body || "";
 	var animatedClass = "animated";
 	var appendChild = "appendChild";
@@ -124,6 +125,7 @@
 			}, 400);
 		}
 
+		docElem[classList].remove(imgLightboxOpenClass);
 		docBody[classList].remove(imgLightboxOpenClass);
 	};
 
@@ -182,6 +184,7 @@
 			var handleImgLightboxLink = function handleImgLightboxLink(ev) {
 				ev.stopPropagation();
 				ev.preventDefault();
+				docElem[classList].add(imgLightboxOpenClass);
 				docBody[classList].add(imgLightboxOpenClass);
 				container[classList].remove(isLoadedClass);
 

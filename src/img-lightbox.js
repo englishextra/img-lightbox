@@ -10,6 +10,7 @@
 /*jshint -W014 */
 (function (root, document) {
 	"use strict";
+	var docElem = document.documentElement || "";
 	var docBody = document.body || "";
 	var animatedClass = "animated";
 	var appendChild = "appendChild";
@@ -97,6 +98,7 @@
 					hideContainer();
 				}, 400);
 		}
+		docElem[classList].remove(imgLightboxOpenClass);
 		docBody[classList].remove(imgLightboxOpenClass);
 	};
 	var imgLightbox = function (linkClass, settings) {
@@ -139,6 +141,7 @@
 			var handleImgLightboxLink = function (ev) {
 				ev.stopPropagation();
 				ev.preventDefault();
+				docElem[classList].add(imgLightboxOpenClass);
 				docBody[classList].add(imgLightboxOpenClass);
 				container[classList].remove(isLoadedClass);
 				var logic = function logic() {
