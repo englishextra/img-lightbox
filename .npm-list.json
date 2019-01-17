@@ -1,6 +1,6 @@
 {
 	"name": "img-lightbox",
-	"version": "0.2.2",
+	"version": "0.2.3",
 	"dependencies": {
 		"@babel/core": {
 			"version": "7.2.2",

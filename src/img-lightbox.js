@@ -112,7 +112,7 @@
 		var onClosed = options.onClosed;
 		var link = document[getElementsByClassName](_linkClass) || "";
 		var container = document[getElementsByClassName](containerClass)[0] || "";
-		var img;
+		var img = container ? container[getElementsByTagName]("img")[0] || "" : "";
 		if (!container) {
 			container = document[createElement]("div");
 			container[classList].add(containerClass);
