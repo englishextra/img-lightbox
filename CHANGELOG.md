@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.2.2 - 2019-01-17
+### Changed
+- Fixed multiple container creation
+
 ## 0.2.1 - 2018-12-22
 ### Changed
 - Fixed body scroll disabling on lightbox open https://github.com/englishextra/iframe-lightbox/issues/18
