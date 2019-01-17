@@ -111,27 +111,30 @@
 		var onCreated = options.onCreated;
 		var onClosed = options.onClosed;
 		var link = document[getElementsByClassName](_linkClass) || "";
-		var container = document[createElement]("div");
-		container[classList].add(containerClass);
-		var html = [];
-		html.push('<img src="' + dummySrc + '" alt="" />');
-		html.push('<div class="half-circle-spinner"><div class="circle circle-1"></div><div class="circle circle-2"></div></div>');
-		html.push('<a href="javascript:void(0);" class="btn-close"></a>');
-		container[innerHTML] = html.join("");
-		docBody[appendChild](container);
-		container = document[getElementsByClassName](containerClass)[0] || "";
-		var img = container ? container[getElementsByTagName]("img")[0] || "" : "";
-		var btnClose = container ? container[getElementsByClassName](btnCloseClass)[0] || "" : "";
-		var handleImgLightboxContainer = function () {
-			hideImgLightbox(onClosed);
-		};
-		container[_addEventListener]("click", handleImgLightboxContainer);
-		btnClose[_addEventListener]("click", handleImgLightboxContainer);
-		root[_addEventListener]("keyup", function (ev) {
-			if (27 === (ev.which || ev.keyCode)) {
+		var container = document[getElementsByClassName](containerClass)[0] || "";
+		var img;
+		if (!container) {
+			container = document[createElement]("div");
+			container[classList].add(containerClass);
+			var html = [];
+			html.push('<img src="' + dummySrc + '" alt="" />');
+			html.push('<div class="half-circle-spinner"><div class="circle circle-1"></div><div class="circle circle-2"></div></div>');
+			html.push('<a href="javascript:void(0);" class="btn-close"></a>');
+			container[innerHTML] = html.join("");
+			docBody[appendChild](container);
+			img = container ? container[getElementsByTagName]("img")[0] || "" : "";
+			var btnClose = container ? container[getElementsByClassName](btnCloseClass)[0] || "" : "";
+			var handleImgLightboxContainer = function () {
 				hideImgLightbox(onClosed);
-			}
-		});
+			};
+			container[_addEventListener]("click", handleImgLightboxContainer);
+			btnClose[_addEventListener]("click", handleImgLightboxContainer);
+			root[_addEventListener]("keyup", function (ev) {
+				if (27 === (ev.which || ev.keyCode)) {
+					hideImgLightbox(onClosed);
+				}
+			});
+		}
 		var arrange = function (e) {
 			var hrefString = e[getAttribute]("href") || e[getAttribute]("data-src") || "";
 			var dataTouch = e[getAttribute]("data-touch") || "";
