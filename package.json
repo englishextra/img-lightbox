@@ -27,6 +27,8 @@
 	"css/img-lightbox.css"],
 	"main": "js/img-lightbox.js",
 	"filename": "js/img-lightbox.js",
+	"main_file": "index.js",
+	"electronVersion": "4.0.0",
 	"repository": {
 		"type": "git",
 		"url": "git://github.com/englishextra/img-lightbox.git"
@@ -41,7 +43,7 @@
 		}]
 	},
 	"dependencies": {
-		"npm": "^6.5.0"
+		"npm": "^6.6.0"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.2.2",
@@ -70,7 +72,6 @@
 	},
 	"email": "englishextra@mail.ru",
 	"url": "https://github.com/englishextra/qrjs/issues",
-	"homepage": "https://github.com/englishextra/img-lightbox",
 	"maintainers": {
 		"name": "Serguei Shimansky",
 		"email": "englishextra@mail.ru",
