@@ -2,33 +2,29 @@
 	"name": "img-lightbox",
 	"version": "0.2.3",
 	"description": "Responsive no-jQuery pure JS/CSS Lightbox for images, no dependencies, 10kb unminified source code, with demo",
-	"keywords": [
-		"lightbox",
-		"vanilla-javascript",
-		"vanilla-js",
-		"css",
-		"js",
-		"html",
-		"front-end",
-		"frontend",
-		"pwa",
-		"webapp",
-		"website",
-		"ui",
-		"browser",
-		"iframe",
-		"no-jquery",
-		"no-dependencies",
-		"no-framework",
-		"youtube",
-		"vimeo",
-		"soundcloud",
-		"audiomack"
-	],
-	"files": [
-		"js/img-lightbox.js",
-		"css/img-lightbox.css"
-	],
+	"keywords": ["lightbox",
+	"vanilla-javascript",
+	"vanilla-js",
+	"css",
+	"js",
+	"html",
+	"front-end",
+	"frontend",
+	"pwa",
+	"webapp",
+	"website",
+	"ui",
+	"browser",
+	"iframe",
+	"no-jquery",
+	"no-dependencies",
+	"no-framework",
+	"youtube",
+	"vimeo",
+	"soundcloud",
+	"audiomack"],
+	"files": ["js/img-lightbox.js",
+	"css/img-lightbox.css"],
 	"main": "js/img-lightbox.js",
 	"filename": "js/img-lightbox.js",
 	"repository": {
@@ -38,15 +34,11 @@
 	"autoupdate": {
 		"source": "git",
 		"target": "git://github.com/englishextra/img-lightbox.git",
-		"fileMap": [
-			{
-				"basePath": "",
-				"files": [
-					"js/img-lightbox*",
-					"css/img-lightbox*"
-				]
-			}
-		]
+		"fileMap": [{
+			"basePath": "",
+			"files": ["js/img-lightbox*",
+			"css/img-lightbox*"]
+		}]
 	},
 	"dependencies": {
 		"npm": "^6.5.0"
