@@ -27,8 +27,10 @@
 	"css/img-lightbox.css"],
 	"main": "js/img-lightbox.js",
 	"filename": "js/img-lightbox.js",
-	"main_file": "index.js",
-	"electronVersion": "4.0.0",
+	"main": "main.js",
+	"window": {
+		"icon": "favicon-32x32.png"
+	},
 	"repository": {
 		"type": "git",
 		"url": "git://github.com/englishextra/img-lightbox.git"

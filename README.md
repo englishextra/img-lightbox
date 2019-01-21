@@ -81,7 +81,7 @@ rel="lightbox"><img src="https://farm1.staticflickr.com/955/27854475488_5f82a379
 
 ## Initialize
 
-```javascript
+ ```js
 imgLightbox("img-lightbox-link");
 ```
 
@@ -93,7 +93,7 @@ That way you avoid multiple assignments to a single element.
 
 ## Examples of event handling
 
- ```javascript
+ ```js
 (function(root) {
 	"use strict";
 	if (root.imgLightbox) {
