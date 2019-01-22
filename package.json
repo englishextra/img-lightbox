@@ -23,10 +23,6 @@
 	"vimeo",
 	"soundcloud",
 	"audiomack"],
-	"files": ["js/img-lightbox.js",
-	"css/img-lightbox.css"],
-	"main": "js/img-lightbox.js",
-	"filename": "js/img-lightbox.js",
 	"main": "main.js",
 	"window": {
 		"icon": "favicon-32x32.png"
@@ -35,6 +31,9 @@
 		"type": "git",
 		"url": "git://github.com/englishextra/img-lightbox.git"
 	},
+	"files": ["js/img-lightbox.js",
+	"css/img-lightbox.css"],
+	"filename": "js/img-lightbox.js",
 	"autoupdate": {
 		"source": "git",
 		"target": "git://github.com/englishextra/img-lightbox.git",
