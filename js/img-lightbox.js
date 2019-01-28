@@ -31,6 +31,7 @@
 	var fadeInUpClass = "fadeInUp";
 	var fadeOutClass = "fadeOut";
 	var fadeOutDownClass = "fadeOutDown";
+	var imgLightboxWindowIsBindedClass = "img-lightbox-window--is-binded";
 	var imgLightboxOpenClass = "img-lightbox--open";
 	var imgLightboxLinkIsBindedClass = "img-lightbox-link--is-binded";
 	var isLoadedClass = "is-loaded";
@@ -46,7 +47,7 @@
 		"onmsgesturechange" in root ||
 		navigator.msMaxTouchPoints;
 
-	var debounce = function (func, wait) {
+	var debounce = function debounce(func, wait) {
 		var timeout;
 		var args;
 		var context;
@@ -172,11 +173,15 @@
 
 			btnClose[_addEventListener]("click", handleImgLightboxContainer);
 
-			root[_addEventListener]("keyup", function(ev) {
-				if (27 === (ev.which || ev.keyCode)) {
-					hideImgLightbox(onClosed);
-				}
-			});
+			if (!docElem[classList].contains(imgLightboxWindowIsBindedClass)) {
+				docElem[classList].add(imgLightboxWindowIsBindedClass);
+
+				root[_addEventListener]("keyup", function(ev) {
+					if (27 === (ev.which || ev.keyCode)) {
+						hideImgLightbox(onClosed);
+					}
+				});
+			}
 		}
 
 		var arrange = function arrange(e) {
