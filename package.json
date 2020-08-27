@@ -31,28 +31,28 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/englishextra/img-lightbox.git"
+		"url": "git://github.com/englishextra/iframe-lightbox.git"
 	},
 	"files": [
-		"js/img-lightbox.js",
-		"css/img-lightbox.css"
+		"js/iframe-lightbox.js",
+		"css/iframe-lightbox.css"
 	],
-	"filename": "js/img-lightbox.js",
+	"filename": "js/iframe-lightbox.js",
 	"autoupdate": {
 		"source": "git",
-		"target": "git://github.com/englishextra/img-lightbox.git",
+		"target": "git://github.com/englishextra/iframe-lightbox.git",
 		"fileMap": [
 			{
 				"basePath": "",
 				"files": [
-					"js/img-lightbox*",
-					"css/img-lightbox*"
+					"js/iframe-lightbox*",
+					"css/iframe-lightbox*"
 				]
 			}
 		]
 	},
 	"dependencies": {
-		"npm": "^6.10.2"
+		"npm": "^6.14.8"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.2.2",
@@ -60,7 +60,7 @@
 		"@babel/plugin-transform-async-to-generator": "^7.2.0",
 		"@babel/plugin-transform-object-assign": "^7.2.0",
 		"@babel/preset-env": "^7.2.0",
-		"browser-sync": "^2.26.7",
+		"browser-sync": "^2.26.12",
 		"gulp": "^4.0.0",
 		"gulp-autoprefixer": "^6.0.0",
 		"gulp-babel": "^8.0.0",
@@ -80,7 +80,7 @@
 		"test": "gulp lint-libbundle-js"
 	},
 	"email": "englishextra@mail.ru",
-	"url": "https://github.com/englishextra/img-lightbox/issues",
+	"url": "https://github.com/englishextra/iframe-lightbox/issues",
 	"maintainers": {
 		"name": "Serguei Shimansky",
 		"email": "englishextra@mail.ru",
