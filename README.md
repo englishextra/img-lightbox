@@ -57,7 +57,7 @@ Responsive no-jQuery pure JS/CSS Lightbox for images, no dependencies, 10kb unmi
 
 ### Setup
 
-`class` "img-lightbox-link" is required, and can be any name you choose.
+`class` is required, and can be any class name you choose (in this demo it's `img-lightbox-link`).
 
 `data-src` is another method to get the source URL when you do not want the link to lead to some real URL.
 
