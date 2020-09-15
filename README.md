@@ -65,9 +65,9 @@ Responsive no-jQuery pure JS/CSS Lightbox for images, no dependencies, 10kb unmi
 
 For those who don't use 3rd-party scripts that interfere with links behaviour and don't force `window.location` they have no need in either `data-touch="true"` or `{touch: true}`.
 
-When you have scripts that interfere, then to keep lightbox working, use `{touch: true}` or `data-touch="true"`.
+When you have scripts that interfere, then to keep lightbox working, use `{touch: true}` or `data-touch="true"` (you shouldn't enable `touch` override if you have a full screen image in a lighbox link and have no other space to scroll down).
 
-`data-src` or `href` doesn't matter, but you shouldn't enable `touch` override if you have a full screen image in a lighbox link and have no other space to scroll down.
+`data-src` or `href` doesn't matter.
 
 [![Build Status](https://farm1.staticflickr.com/955/27854475488_5f82a379ca_z.jpg)](https://farm1.staticflickr.com/955/27854475488_5f82a379ca_z.jpg)
 
@@ -87,7 +87,7 @@ imgLightbox("img-lightbox-link");
 
 ## Tips
 
-SPA / PWA developers don't need to bother: built-in class is added to a link.
+SPA / PWA developers don't need to bother: work-related class is added to a link.
 
 That way you avoid multiple assignments to a single element.
 
