@@ -5,7 +5,6 @@ Responsive no-jQuery pure JS/CSS Lightbox for images, no dependencies, 10kb unmi
 [![NPM](https://nodei.co/npm/img-lightbox.png?downloads=true)](https://nodei.co/npm/img-lightbox/)
 
 [![npm](https://img.shields.io/npm/v/img-lightbox.svg)](https://github.com/englishextra/img-lightbox)
-[![Bower](https://img.shields.io/bower/v/img-lightbox.svg)](https://github.com/englishextra/img-lightbox)
 [![Build Status](https://travis-ci.com/englishextra/img-lightbox.svg?branch=master)](https://travis-ci.com/englishextra/img-lightbox)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2fbe9cbd4dcb4d3b8fe83dac98633f67)](https://www.codacy.com/app/englishextra/img-lightbox?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=englishextra/img-lightbox&amp;utm_campaign=Badge_Grade)
 
@@ -50,10 +49,6 @@ Responsive no-jQuery pure JS/CSS Lightbox for images, no dependencies, 10kb unmi
 #### npm
 
 `npm install img-lightbox`
-
-#### bower
-
-`bower install img-lightbox`
 
 ### Setup
 
