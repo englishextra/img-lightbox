@@ -7,8 +7,11 @@
  * imgLightbox(linkClass, settings)
  * passes jshint
  */
+
 /*jslint browser: true */
+
 /*jslint node: true */
+
 /*jshint -W014 */
 (function (root, document) {
 	"use strict";
