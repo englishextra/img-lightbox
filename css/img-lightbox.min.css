@@ -115,6 +115,7 @@
 /*!
  * img lightbox
  */
+
 .img-lightbox {
 	display: none;
 	opacity: 0;
@@ -155,6 +156,7 @@
  * reset for animate.css
  * daneden.github.io/animate.css/
  */
+
 .img-lightbox.animated,
 .img-lightbox img.animated {
 	-webkit-animation-duration: 0.4s;
@@ -167,6 +169,7 @@
  * another pure css spinner
  * @see {@link https://epic-spinners.epicmax.co/}
  */
+
 .img-lightbox .half-circle-spinner,
 .img-lightbox .half-circle-spinner * {
 	-webkit-box-sizing: border-box;
@@ -251,6 +254,7 @@
  * pure css version
  * @see {@link https://codepen.io/brissmyr/pen/egidw}
  */
+
 .img-lightbox .btn-close:before,
 .img-lightbox .btn-close:after {
 	content: " ";
@@ -275,6 +279,7 @@
 /*!
  * @see {@link https://github.com/englishextra/iframe-lightbox/issues/12}
  */
+
 .img-lightbox--open {
 	overflow: hidden;
 	-webkit-overflow-scrolling: touch;
