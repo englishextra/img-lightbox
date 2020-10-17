@@ -161,7 +161,7 @@
 			html.push(
 				'<div class="half-circle-spinner"><div class="circle circle-1"></div><div class="circle circle-2"></div></div>'
 			);
-			html.push('<a href="javascript:void(0);" class="btn-close"></a>');
+			html.push('<button class="btn-close"></button>');
 			container.innerHTML = html.join("");
 			docBody.appendChild(container);
 			img = container
