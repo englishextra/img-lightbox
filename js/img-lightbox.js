@@ -106,7 +106,7 @@
 				img.classList.remove(animatedClass);
 				img.classList.remove(fadeOutDownClass);
 
-				img.onload = function() {
+				img.onload = function () {
 					container.classList.remove(isLoadedClass);
 				};
 
@@ -214,7 +214,7 @@
 					img.classList.add(animatedClass);
 					img.classList.add(fadeInUpClass);
 
-					img.onload = function() {
+					img.onload = function () {
 						container.classList.add(isLoadedClass);
 
 						if (onLoaded) {
@@ -222,7 +222,7 @@
 						}
 					};
 
-					img.onerror = function() {
+					img.onerror = function () {
 						if (onError) {
 							callCallback(onError, root);
 						}
