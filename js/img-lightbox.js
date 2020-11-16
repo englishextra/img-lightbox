@@ -46,7 +46,7 @@
 		var args;
 		var context;
 		var timestamp;
-		return function() {
+		return function () {
 			context = this;
 			args = [].slice.call(arguments, 0);
 			timestamp = new Date();
@@ -115,7 +115,7 @@
 				callCallback(callback, root);
 			};
 
-			var timer = setTimeout(function() {
+			var timer = setTimeout(function () {
 				clearTimeout(timer);
 				timer = null;
 				hideImg();
@@ -125,7 +125,7 @@
 		if (container && img) {
 			img.classList.remove(fadeInUpClass);
 			img.classList.add(fadeOutDownClass);
-			var timer = setTimeout(function() {
+			var timer = setTimeout(function () {
 				clearTimeout(timer);
 				timer = null;
 				hideContainer();
