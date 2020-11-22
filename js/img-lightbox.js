@@ -246,12 +246,11 @@
 		};
 
 		if (container && img && link) {
-			var i, l;
-
+			var i,
+			l;
 			for (i = 0, l = link.length; i < l; i += 1) {
 				arrange(link[i]);
 			}
-
 			i = l = null;
 		}
 	};
