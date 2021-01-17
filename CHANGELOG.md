@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 The project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 0.2.3 - 2019-01-17
+## 0.2.4 - 2019-01-17
 
 ### Changed
 
