@@ -5,7 +5,7 @@ Responsive no-jQuery pure JS/CSS Lightbox for images, no dependencies, 10kb unmi
 [![npm](https://img.shields.io/npm/v/img-lightbox.svg)](https://www.npmjs.com/package/img-lightbox)
 [![Build Status](https://travis-ci.com/englishextra/img-lightbox.svg?branch=master)](https://travis-ci.com/englishextra/img-lightbox)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/2fbe9cbd4dcb4d3b8fe83dac98633f67)](https://www.codacy.com/manual/englishextra/img-lightbox/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=englishextra/img-lightbox&amp;utm_campaign=Badge_Grade)
-[![](https://data.jsdelivr.com/v1/package/npm/img-lightbox/badge)](https://www.jsdelivr.com/package/npm/img-lightbox)
+[![jsdelivr](https://data.jsdelivr.com/v1/package/npm/img-lightbox/badge)](https://www.jsdelivr.com/package/npm/img-lightbox)
 
 ## Demo
 
