@@ -25,14 +25,8 @@
 		"soundcloud",
 		"audiomack"
 	],
-	"main": "main.js",
-	"window": {
-		"icon": "favicon-32x32.png"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git://github.com/englishextra/img-lightbox.git"
-	},
+	"main": "js/img-lightbox.js",
+	"style": "css/img-lightbox.css",
 	"files": [
 		"index.html",
 		"js/img-lightbox.js",
@@ -42,15 +36,17 @@
 	"autoupdate": {
 		"source": "git",
 		"target": "git://github.com/englishextra/img-lightbox.git",
-		"fileMap": [
-			{
-				"basePath": "",
-				"files": [
-					"js/img-lightbox*",
-					"css/img-lightbox*"
-				]
-			}
-		]
+		"fileMap": [{
+			"basePath": "",
+			"files": [
+				"js/img-lightbox*",
+				"css/img-lightbox*"
+			]
+		}]
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/englishextra/img-lightbox.git"
 	},
 	"dependencies": {
 		"npm": "^7.3.0"
