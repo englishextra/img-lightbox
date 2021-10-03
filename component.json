@@ -1,7 +1,7 @@
 {
 	"name": "img-lightbox",
 	"repo": "englishextra/img-lightbox",
-	"version": "0.2.5",
+	"version": "0.2.6",
 	"scripts": ["img-lightbox.js"],
 	"styles": ["img-lightbox.css"],
 	"author": "englishextra",
